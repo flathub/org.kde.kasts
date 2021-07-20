@@ -26,11 +26,7 @@
                 },
                 {
                     "type": "patch",
-                    "path": "0001-add-url.patch"
-                },
-                {
-                    "type": "patch",
-                    "path": "0002-force-breeze-icons.patch"
+                    "path": "0001-force-breeze-icons.patch"
                 }
             ]
         }
