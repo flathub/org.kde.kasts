@@ -21,8 +21,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.kde.org/stable/plasma-mobile/21.06/kasts-21.06.tar.xz",
-                    "sha256": "a00b413d17b059cb9fc734104b8403f7098ced0e86ad23c5920e2b7846785e4d"
+                    "url": "https://download.kde.org/stable/plasma-mobile/21.07/kasts-21.07.tar.xz",
+                    "sha256": "9910ff2f07b64c31155579820c7978c34071fd273e8c922f505c8d9f32dc6dc7"
                 },
                 {
                     "type": "patch",
