@@ -1,21 +1,12 @@
 diff --git a/src/main.cpp b/src/main.cpp
-index 4c6bdf6..01236a0 100644
+index d0c900b..fa5db86 100644
 --- a/src/main.cpp
 +++ b/src/main.cpp
-@@ -15,6 +15,7 @@
- #include <QString>
- #include <QStringList>
- #include <QVariant>
-+#include <QIcon>
- 
- #ifdef Q_OS_ANDROID
- #include <QGuiApplication>
-@@ -76,6 +77,8 @@ int main(int argc, char *argv[])
-     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
-     KLocalizedString::setApplicationDomain("kasts");
- 
+@@ -66,6 +66,7 @@ int main(int argc, char *argv[])
+     qInstallMessageHandler(myMessageHandler);
+     QLoggingCategory::setFilterRules(QStringLiteral("org.kde.*=true"));
+     QQuickStyle::setStyle(QStringLiteral("Material"));
 +    QIcon::setThemeName(QStringLiteral("breeze"));
-+
-     QCommandLineParser parser;
-     parser.setApplicationDescription(i18n("Podcast Application"));
-     QCommandLineOption addFeedOption(QStringList() << QStringLiteral("a") << QStringLiteral("add"),
+ #else
+     QApplication app(argc, argv);
+     if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
