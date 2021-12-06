@@ -21,8 +21,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.kde.org/stable/plasma-mobile/21.08/kasts-21.08.tar.xz",
-                    "sha256": "762bfc029455b87d564e4e9e6f4ca0e7e9150e1716c4b63e8cd690cd3b8b6683"
+                    "url": "https://download.kde.org/stable/plasma-mobile/21.12/kasts-21.12.tar.xz",
+                    "sha256": "601719980e3b9853f8ca136cd48395874c0ecb4eed36b8ee14376129fb85d5e6"
                 },
                 {
                     "type": "patch",
