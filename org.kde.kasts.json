@@ -24,7 +24,7 @@
         {
             "name": "qtkeychain",
             "buildsystem": "cmake-ninja",
-            "sources": [ { "type": "archive", "url": "https://github.com/frankosterfeld/qtkeychain/archive/v0.12.0.tar.gz", "sha256": "cc547d58c1402f6724d3ff89e4ca83389d9e2bdcfd9ae3d695fcdffa50a625a8" } ],
+            "sources": [ { "type": "archive", "url": "https://github.com/frankosterfeld/qtkeychain/archive/v0.13.2.tar.gz", "sha256": "20beeb32de7c4eb0af9039b21e18370faf847ac8697ab3045906076afbc4caa5" } ],
             "config-opts": [ "-DCMAKE_INSTALL_LIBDIR=/app/lib", "-DLIB_INSTALL_DIR=/app/lib", "-DBUILD_TRANSLATIONS=NO" ]
         },
         {
@@ -33,8 +33,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.kde.org/stable/plasma-mobile/21.12/kasts-21.12.tar.xz",
-                    "sha256": "601719980e3b9853f8ca136cd48395874c0ecb4eed36b8ee14376129fb85d5e6"
+                    "url": "https://download.kde.org/stable/plasma-mobile/22.02/kasts-22.02.tar.xz",
+                    "sha256": "61b453212eaf758c0018c66d01a5d164d70a35b28725111097a54975fabd7923"
                 },
                 {
                     "type": "patch",
