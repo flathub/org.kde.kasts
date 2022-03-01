@@ -22,9 +22,26 @@
             "config-opts": [ "-DBUILD_SHARED_LIBS=ON" ]
         },
         {
+            "name": "libsecret",
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Dmanpage=false",
+                "-Dvapi=false",
+                "-Dgtk_doc=false",
+                "-Dintrospection=false"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://gitlab.gnome.org/GNOME/libsecret/-/archive/0.20.5/libsecret-0.20.5.tar.gz",
+                    "sha256": "b33b9542222ea8866f6ff2d31c0ad373877c2277db546ca00cc7fdda9cbab1c3"
+                }
+            ]
+        },
+        {
             "name": "qtkeychain",
             "buildsystem": "cmake-ninja",
-            "sources": [ { "type": "archive", "url": "https://github.com/frankosterfeld/qtkeychain/archive/v0.12.0.tar.gz", "sha256": "cc547d58c1402f6724d3ff89e4ca83389d9e2bdcfd9ae3d695fcdffa50a625a8" } ],
+            "sources": [ { "type": "archive", "url": "https://github.com/frankosterfeld/qtkeychain/archive/v0.13.2.tar.gz", "sha256": "20beeb32de7c4eb0af9039b21e18370faf847ac8697ab3045906076afbc4caa5" } ],
             "config-opts": [ "-DCMAKE_INSTALL_LIBDIR=/app/lib", "-DLIB_INSTALL_DIR=/app/lib", "-DBUILD_TRANSLATIONS=NO" ]
         },
         {
