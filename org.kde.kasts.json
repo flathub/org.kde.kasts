@@ -12,7 +12,8 @@
         "--socket=wayland",
         "--device=dri",
         "--socket=pulseaudio",
-        "--own-name=org.mpris.MediaPlayer2.kasts"
+        "--own-name=org.mpris.MediaPlayer2.kasts",
+        "--talk-name=org.freedesktop.secrets"
     ],
     "modules": [
         {
