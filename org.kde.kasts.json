@@ -87,8 +87,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.kde.org/stable/plasma-mobile/22.06/kasts-22.06.tar.xz",
-                    "sha256": "3353997cecaaeb8129b810973e751d221b852bc8fcd0e9970e1fe6fe4855f643",
+                    "url": "https://download.kde.org/stable/plasma-mobile/22.09/kasts-22.09.1.tar.xz",
+                    "sha256": "dc4e83ee591a8282e34fd536be0f113854ddfac68fed06cf6d0e62faae2a70f5",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 242953,
