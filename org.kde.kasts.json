@@ -15,7 +15,46 @@
         "--own-name=org.mpris.MediaPlayer2.kasts",
         "--talk-name=org.freedesktop.secrets"
     ],
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/lib/cmake",
+        "*.la",
+        "*.a"
+    ],
+    "cleanup-commands": [
+        "rm -f /app/lib/vlc/plugins/plugins.dat",
+        "/app/lib/vlc/vlc-cache-gen /app/lib/vlc/plugins"
+    ],
     "modules": [
+        {
+            "name": "libvlc",
+            "config-opts": [
+                "BUILDCC=gcc",
+                "--disable-lua",
+                "--disable-a52",
+                "--disable-qt",
+                "--disable-ncurses",
+                "--disable-udev"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://get.videolan.org/vlc/3.0.18/vlc-3.0.18.tar.xz",
+                    "sha256": "57094439c365d8aa8b9b41fa3080cc0eef2befe6025bb5cef722accc625aedec",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 6504,
+                        "stable-only": true,
+                        "url-template": "https://get.videolan.org/vlc/$version/vlc-$version.tar.xz"
+                    }
+                },
+                {
+                    "type": "patch",
+                    "path": "vlc-ignore-time-for-cache.patch"
+                }
+            ]
+        },
         {
             "name": "taglib",
             "buildsystem": "cmake-ninja",
@@ -82,13 +121,33 @@
             ]
         },
         {
+            "name": "kirigami-addons",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.kde.org/stable/kirigami-addons/kirigami-addons-0.7.0.tar.xz",
+                    "sha256": "0132a58b150229544a61e17e792c48cfc6daa03a8be9c7acd873a6c30d283df7",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 242933,
+                        "stable-only": true,
+                        "url-template": "https://download.kde.org/stable/kirigami-addons/kirigami-addons-$version.tar.xz"
+                    }
+                }
+            ],
+            "config-opts": [
+                "-DBUILD_TESTING=OFF"
+            ]
+        },
+        {
             "name": "kasts",
             "buildsystem": "cmake-ninja",
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.kde.org/stable/plasma-mobile/22.11/kasts-22.11.tar.xz",
-                    "sha256": "2912b4a8864e35a7dadc16b9368988b6163870a0358e020c3b80b31222002711",
+                    "url": "https://download.kde.org/stable/plasma-mobile/23.01.0/kasts-23.01.0.tar.xz",
+                    "sha256": "6ec76b04fd6c06fa1f3201cb907e9b58ec9b414b35e6ae2cc5d1d6b64b7bbb27",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 242953,
