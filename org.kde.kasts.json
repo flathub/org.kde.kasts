@@ -2,7 +2,7 @@
     "id": "org.kde.kasts",
     "rename-icon": "kasts",
     "runtime": "org.kde.Platform",
-    "runtime-version": "flatpak install --user https://dl.flathub.org/build-repo/5349/org.kde.kweather.flatpakref",
+    "runtime-version": "5.15-22.08",
     "sdk": "org.kde.Sdk",
     "command": "kasts",
     "finish-args": [
