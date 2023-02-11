@@ -150,7 +150,7 @@
                     "sha256": "6ec76b04fd6c06fa1f3201cb907e9b58ec9b414b35e6ae2cc5d1d6b64b7bbb27",
                     "x-checker-data": {
                         "type": "anitya",
-                        "project-id": 242953,
+                        "project-id": 326638,
                         "stable-only": true,
                         "url-template": "https://download.kde.org/stable/plasma-mobile/$version/kasts-$version.tar.xz"
                     }
