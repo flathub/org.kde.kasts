@@ -143,6 +143,10 @@
         {
             "name": "kasts",
             "buildsystem": "cmake-ninja",
+            "post-install": [
+                "mv /app/bin/{kasts,kasts-bin}",
+                "install run_kasts.sh /app/bin/kasts"
+            ],
             "sources": [
                 {
                     "type": "archive",
@@ -158,6 +162,10 @@
                 {
                     "type": "patch",
                     "path": "0001-force-breeze-icons.patch"
+                },
+                {
+                    "type": "file",
+                    "path": "run_kasts.sh"
                 }
             ]
         }
