@@ -150,13 +150,13 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.kde.org/stable/plasma-mobile/23.01.0/kasts-23.01.0.tar.xz",
-                    "sha256": "6ec76b04fd6c06fa1f3201cb907e9b58ec9b414b35e6ae2cc5d1d6b64b7bbb27",
+                    "url": "https://download.kde.org/stable/release-service/23.04.0/src/kasts-23.04.0.tar.xz",
+                    "sha256": "985f3617caf75866adfb92e10d67fc22f69ea70ac577e6671a01708f62e9134f",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 326638,
                         "stable-only": true,
-                        "url-template": "https://download.kde.org/stable/plasma-mobile/$version/kasts-$version.tar.xz"
+                        "url-template": "https://download.kde.org/stable/release-service/$version/src/kasts-$version.tar.xz"
                     }
                 },
                 {
