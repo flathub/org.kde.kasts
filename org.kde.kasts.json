@@ -155,9 +155,9 @@
                     "sha256": "2be1acf8db91d0084c1d518a0556edcca68985602bac2b82133e07821801ec62",
                     "x-checker-data": {
                         "type": "anitya",
-                        "project-id": 326638,
+                        "project-id": 368663,
                         "stable-only": true,
-                        "url-template": "https://download.kde.org/stable/release-service/$version/src/kasts-$version.tar.xz"
+                        "url-template": "https://download.kde.org/unstable/release-service/$version/src/kasts-$version.tar.xz"
                     }
                 },
                 {
