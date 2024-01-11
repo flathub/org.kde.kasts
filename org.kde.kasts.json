@@ -83,8 +83,7 @@
                 "-Dmanpage=false",
                 "-Dvapi=false",
                 "-Dgtk_doc=false",
-                "-Dintrospection=false",
-                "-Dgcrypt=false"
+                "-Dintrospection=false"
             ],
             "sources": [
                 {
