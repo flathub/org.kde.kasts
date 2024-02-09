@@ -62,8 +62,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://taglib.github.io/releases/taglib-1.13.1.tar.gz",
-                    "sha256": "c8da2b10f1bfec2cd7dbfcd33f4a2338db0765d851a50583d410bacf055cfd0b",
+                    "url": "https://taglib.github.io/releases/taglib-2.0.tar.gz",
+                    "sha256": "e36ea877a6370810b97d84cf8f72b1e4ed205149ab3ac8232d44c850f38a2859",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 1982,
@@ -89,8 +89,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.2.tar.xz",
-                    "sha256": "e4a341496a0815e64c8d3b8fabab33d7bae7efdeab77b843669731d5b181dcee",
+                    "url": "https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.3.tar.xz",
+                    "sha256": "9a3e2571f1048035d80238f52c8760125884a43baf8a580fedb7250c1ad0a9e7",
                     "x-checker-data": {
                         "type": "gnome",
                         "name": "libsecret",
