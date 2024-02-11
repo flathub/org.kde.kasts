@@ -29,6 +29,43 @@
     ],
     "modules": [
         {
+            "name": "utfcpp",
+            "buildsystem": "cmake",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/nemtrif/utfcpp/archive/v4.0.5.tar.gz",
+                    "sha256": "ffc668a310e77607d393f3c18b32715f223da1eac4c4d6e0579a11df8e6b59cf",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 20545,
+                        "stable-only": true,
+                        "url-template": "https://github.com/nemtrif/utfcpp/archive/v$version.tar.gz"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "taglib",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://taglib.github.io/releases/taglib-2.0.tar.gz",
+                    "sha256": "e36ea877a6370810b97d84cf8f72b1e4ed205149ab3ac8232d44c850f38a2859",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 1982,
+                        "stable-only": true,
+                        "url-template": "https://taglib.github.io/releases/taglib-$version.tar.gz"
+                    }
+                }
+            ],
+            "config-opts": [
+                "-DBUILD_SHARED_LIBS=ON"
+            ]
+        },
+        {
             "name": "libvlc",
             "config-opts": [
                 "BUILDCC=gcc",
@@ -54,26 +91,6 @@
                     "type": "patch",
                     "path": "vlc-ignore-time-for-cache.patch"
                 }
-            ]
-        },
-        {
-            "name": "taglib",
-            "buildsystem": "cmake-ninja",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://taglib.github.io/releases/taglib-2.0.tar.gz",
-                    "sha256": "e36ea877a6370810b97d84cf8f72b1e4ed205149ab3ac8232d44c850f38a2859",
-                    "x-checker-data": {
-                        "type": "anitya",
-                        "project-id": 1982,
-                        "stable-only": true,
-                        "url-template": "https://taglib.github.io/releases/taglib-$version.tar.gz"
-                    }
-                }
-            ],
-            "config-opts": [
-                "-DBUILD_SHARED_LIBS=ON"
             ]
         },
         {
