@@ -56,6 +56,7 @@
                 }
             ]
         },
+        {
             "name": "utfcpp",
             "buildsystem": "cmake-ninja",
             "sources": [
