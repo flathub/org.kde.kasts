@@ -69,8 +69,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.3.tar.xz",
-                    "sha256": "9a3e2571f1048035d80238f52c8760125884a43baf8a580fedb7250c1ad0a9e7",
+                    "url": "https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.4.tar.xz",
+                    "sha256": "163d08d783be6d4ab9a979ceb5a4fecbc1d9660d3c34168c581301cd53912b20",
                     "x-checker-data": {
                         "type": "gnome",
                         "name": "libsecret",
@@ -107,8 +107,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.kde.org/stable/kirigami-addons/kirigami-addons-0.11.0.tar.xz",
-                    "sha256": "05296c5afbe6804308bf9c0d2751f3b748b40d00fa784946d1dcdf3af4bffbad",
+                    "url": "https://download.kde.org/stable/kirigami-addons/kirigami-addons-1.0.1.tar.xz",
+                    "sha256": "9d013847efb0048c6a2799ee0ed281b14eee15314ac20d7fba853197e45f29b7",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 242933,
@@ -131,8 +131,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.kde.org/stable/release-service/23.08.4/src/kasts-23.08.4.tar.xz",
-                    "sha256": "b1e659d6c79b14be594753b7eb27391554f9eabc106d4900c801c4dfbe0072a3",
+                    "url": "https://download.kde.org/stable/release-service/24.02.0/src/kasts-24.02.0.tar.xz",
+                    "sha256": "e21dbe9096a46fcedf93b93e3a57bb1d88a1939cc05142e4d9c90dd97087b9e7",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 326638,
