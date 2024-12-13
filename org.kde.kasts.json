@@ -49,16 +49,7 @@
                 {
                     "type": "archive",
                     "url": "https://ffmpeg.org/releases/ffmpeg-4.4.5.tar.xz",
-                    "sha256": "f9514e0d3515aee5a271283df71636e1d1ff7274b15853bcd84e144be416ab07",
-                    "x-checker-data": {
-                        "type": "anitya",
-                        "project-id": 5405,
-                        "version": {
-                            ">=": 4,
-                            "<": 5
-                        },
-                        "url-template": "https://ffmpeg.org/releases/ffmpeg-$version.tar.xz"
-                    }
+                    "sha256": "f9514e0d3515aee5a271283df71636e1d1ff7274b15853bcd84e144be416ab07"
                 }
             ]
         },        {
