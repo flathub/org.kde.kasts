@@ -161,8 +161,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.kde.org/stable/release-service/24.12.1/src/kasts-24.12.1.tar.xz",
-                    "sha256": "1b04c81d5a8adbc6f89120e0fafaf123c8d7e677c850ba3921de4e66d3abf00c",
+                    "url": "https://download.kde.org/stable/release-service/24.12.2/src/kasts-24.12.2.tar.xz",
+                    "sha256": "afe8bbcf907caea592448a7c93bdc461d5fb28c3c247a552fbbbb69d7afa3ac9",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 326638,
