@@ -175,6 +175,10 @@
                     "path": "0001-force-breeze-icons.patch"
                 },
                 {
+                    "type": "patch",
+                    "path": "0002-kirigami-dialog-fix.patch"
+                },
+                {
                     "type": "file",
                     "path": "run_kasts.sh"
                 }
