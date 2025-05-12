@@ -161,8 +161,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.kde.org/stable/release-service/25.04.0/src/kasts-25.04.0.tar.xz",
-                    "sha256": "49e0983cf70d17e1771255c0321d74602c54e28cf7d14d3143286d9a22c898fe",
+                    "url": "https://download.kde.org/stable/release-service/25.04.1/src/kasts-25.04.1.tar.xz",
+                    "sha256": "a390ff4c69ee619deea0088599bf2f1788845868ed3df37da7c7cd556d4ba182",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 326638,
@@ -173,10 +173,6 @@
                 {
                     "type": "patch",
                     "path": "0001-force-breeze-icons.patch"
-                },
-                {
-                    "type": "patch",
-                    "path": "0002-Anchor-header-depending-on-qt-version.patch"
                 },
                 {
                     "type": "file",
