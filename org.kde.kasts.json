@@ -1,157 +1,134 @@
 {
-    "id": "org.kde.kasts",
-    "rename-icon": "kasts",
-    "runtime": "org.kde.Platform",
-    "runtime-version": "6.10",
-    "sdk": "org.kde.Sdk",
-    "command": "kasts",
-    "finish-args": [
-        "--share=ipc",
-        "--share=network",
-        "--socket=fallback-x11",
-        "--socket=wayland",
-        "--device=dri",
-        "--socket=pulseaudio",
-        "--own-name=org.mpris.MediaPlayer2.kasts",
-        "--talk-name=org.freedesktop.secrets",
-        "--talk-name=org.kde.StatusNotifierWatcher",
-        "--talk-name=org.freedesktop.PowerManagement.Inhibit",
-        "--talk-name=org.gnome.SessionManager"
-    ],
-    "cleanup": [
-        "/include",
-        "/lib/pkgconfig",
-        "/lib/cmake",
-        "*.la",
-        "*.a"
-    ],
-    "cleanup-commands": [
-        "rm -f /app/lib/vlc/plugins/plugins.dat",
-        "/app/lib/vlc/vlc-cache-gen /app/lib/vlc/plugins"
-    ],
-    "modules": [
+  "id": "org.kde.kasts",
+  "rename-icon": "kasts",
+  "runtime": "org.kde.Platform",
+  "runtime-version": "6.10",
+  "sdk": "org.kde.Sdk",
+  "command": "kasts",
+  "finish-args": [
+    "--share=ipc",
+    "--share=network",
+    "--socket=fallback-x11",
+    "--socket=wayland",
+    "--device=dri",
+    "--socket=pulseaudio",
+    "--own-name=org.mpris.MediaPlayer2.kasts",
+    "--talk-name=org.freedesktop.secrets",
+    "--talk-name=org.kde.StatusNotifierWatcher",
+    "--talk-name=org.freedesktop.PowerManagement.Inhibit",
+    "--talk-name=org.gnome.SessionManager"
+  ],
+  "cleanup": [
+    "/include",
+    "/lib/pkgconfig",
+    "/lib/cmake",
+    "*.la",
+    "*.a"
+  ],
+  "cleanup-commands": [
+    "rm -f /app/lib/vlc/plugins/plugins.dat",
+    "/app/lib/vlc/vlc-cache-gen /app/lib/vlc/plugins"
+  ],
+  "modules": [
+    {
+      "name": "libvlc",
+      "config-opts": [
+        "BUILDCC=gcc",
+        "--disable-lua",
+        "--disable-a52",
+        "--disable-qt",
+        "--disable-ncurses",
+        "--disable-udev"
+      ],
+      "sources": [
         {
-            "name": "ffmpeg",
-            "config-opts": [
-                "--enable-pic",
-                "--enable-shared",
-                "--disable-doc",
-                "--disable-static",
-                "--enable-gpl",
-                "--disable-libx264",
-                "--disable-libx265",
-                "--enable-libvpx",
-                "--enable-libmp3lame",
-                "--enable-libvorbis",
-                "--enable-libopus"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://ffmpeg.org/releases/ffmpeg-4.4.5.tar.xz",
-                    "sha256": "f9514e0d3515aee5a271283df71636e1d1ff7274b15853bcd84e144be416ab07"
-                }
-            ]
+          "type": "archive",
+          "url": "https://get.videolan.org/vlc/3.0.22/vlc-3.0.22.tar.xz",
+          "sha256": "e2cc1cf0ae0902a09da5a37c249a8a4e4b5ec4dc095443b8e1493c6a7cc138ea",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 6504,
+            "stable-only": true,
+            "url-template": "https://get.videolan.org/vlc/$version/vlc-$version.tar.xz"
+          }
         },
         {
-            "name": "libvlc",
-            "config-opts": [
-                "BUILDCC=gcc",
-                "--disable-lua",
-                "--disable-a52",
-                "--disable-qt",
-                "--disable-ncurses",
-                "--disable-udev"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://get.videolan.org/vlc/3.0.22/vlc-3.0.22.tar.xz",
-                    "sha256": "e2cc1cf0ae0902a09da5a37c249a8a4e4b5ec4dc095443b8e1493c6a7cc138ea",
-                    "x-checker-data": {
-                        "type": "anitya",
-                        "project-id": 6504,
-                        "stable-only": true,
-                        "url-template": "https://get.videolan.org/vlc/$version/vlc-$version.tar.xz"
-                    }
-                },
-                {
-                    "type": "patch",
-                    "path": "vlc-ignore-time-for-cache.patch"
-                }
-            ]
-        },
-        {
-            "name": "qtkeychain",
-            "buildsystem": "cmake-ninja",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/frankosterfeld/qtkeychain/archive/0.15.0.tar.gz",
-                    "sha256": "f4254dc8f0933b06d90672d683eab08ef770acd8336e44dfa030ce041dc2ca22",
-                    "x-checker-data": {
-                        "type": "anitya",
-                        "project-id": 4138,
-                        "stable-only": true,
-                        "url-template": "https://github.com/frankosterfeld/qtkeychain/archive/$version.tar.gz"
-                    }
-                }
-            ],
-            "config-opts": [
-                "-DCMAKE_INSTALL_LIBDIR=/app/lib",
-                "-DLIB_INSTALL_DIR=/app/lib",
-                "-DBUILD_TRANSLATIONS=NO",
-                "-DBUILD_WITH_QT6=ON"
-            ]
-        },
-        {
-            "name": "kirigami-addons",
-            "buildsystem": "cmake-ninja",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.kde.org/stable/kirigami-addons/kirigami-addons-1.10.0.tar.xz",
-                    "sha256": "c98f92bf7c452e12f6dc403404215413db3959fe904ad830ead0db6bb09b3d11",
-                    "x-checker-data": {
-                        "type": "anitya",
-                        "project-id": 242933,
-                        "stable-only": true,
-                        "url-template": "https://download.kde.org/stable/kirigami-addons/kirigami-addons-$version.tar.xz"
-                    }
-                }
-            ],
-            "config-opts": [
-                "-DBUILD_TESTING=OFF"
-            ]
-        },
-        {
-            "name": "kasts",
-            "buildsystem": "cmake-ninja",
-            "post-install": [
-                "mv /app/bin/{kasts,kasts-bin}",
-                "install run_kasts.sh /app/bin/kasts"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.kde.org/stable/release-service/25.08.3/src/kasts-25.08.3.tar.xz",
-                    "sha256": "cccc8e32c9cf206f2dfc9db3619686439c3e05b9d352be8ac951c99c9ad86273",
-                    "x-checker-data": {
-                        "type": "anitya",
-                        "project-id": 326638,
-                        "stable-only": true,
-                        "url-template": "https://download.kde.org/stable/release-service/$version/src/kasts-$version.tar.xz"
-                    }
-                },
-                {
-                    "type": "patch",
-                    "path": "0001-force-breeze-icons.patch"
-                },
-                {
-                    "type": "file",
-                    "path": "run_kasts.sh"
-                }
-            ]
+          "type": "patch",
+          "path": "vlc-ignore-time-for-cache.patch"
         }
-    ]
+      ]
+    },
+    {
+      "name": "qtkeychain",
+      "buildsystem": "cmake-ninja",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/frankosterfeld/qtkeychain/archive/0.15.0.tar.gz",
+          "sha256": "f4254dc8f0933b06d90672d683eab08ef770acd8336e44dfa030ce041dc2ca22",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 4138,
+            "stable-only": true,
+            "url-template": "https://github.com/frankosterfeld/qtkeychain/archive/$version.tar.gz"
+          }
+        }
+      ],
+      "config-opts": [
+        "-DCMAKE_INSTALL_LIBDIR=/app/lib",
+        "-DLIB_INSTALL_DIR=/app/lib",
+        "-DBUILD_TRANSLATIONS=NO",
+        "-DBUILD_WITH_QT6=ON"
+      ]
+    },
+    {
+      "name": "kirigami-addons",
+      "buildsystem": "cmake-ninja",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/kirigami-addons/kirigami-addons-1.10.0.tar.xz",
+          "sha256": "c98f92bf7c452e12f6dc403404215413db3959fe904ad830ead0db6bb09b3d11",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 242933,
+            "stable-only": true,
+            "url-template": "https://download.kde.org/stable/kirigami-addons/kirigami-addons-$version.tar.xz"
+          }
+        }
+      ],
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ]
+    },
+    {
+      "name": "kasts",
+      "buildsystem": "cmake-ninja",
+      "post-install": [
+        "mv /app/bin/{kasts,kasts-bin}",
+        "install run_kasts.sh /app/bin/kasts"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/release-service/25.08.3/src/kasts-25.08.3.tar.xz",
+          "sha256": "cccc8e32c9cf206f2dfc9db3619686439c3e05b9d352be8ac951c99c9ad86273",
+          "x-checker-data": {
+            "type": "anitya",
+            "project-id": 326638,
+            "stable-only": true,
+            "url-template": "https://download.kde.org/stable/release-service/$version/src/kasts-$version.tar.xz"
+          }
+        },
+        {
+          "type": "patch",
+          "path": "0001-force-breeze-icons.patch"
+        },
+        {
+          "type": "file",
+          "path": "run_kasts.sh"
+        }
+      ]
+    }
+  ]
 }
