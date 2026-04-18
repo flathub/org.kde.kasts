@@ -1,0 +1,25 @@
+From 1143b0e3081959f90a9c9a0282191fdc4d7d706b Mon Sep 17 00:00:00 2001
+From: Bart De Vries <bart@mogwai.be>
+Date: Sat, 18 Apr 2026 19:25:41 +0200
+Subject: [PATCH] Fix casting of globaldrawer to correct type
+
+---
+ src/qml/Main.qml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/qml/Main.qml b/src/qml/Main.qml
+index 6bc45b79..e909ad8e 100644
+--- a/src/qml/Main.qml
++++ b/src/qml/Main.qml
+@@ -112,7 +112,7 @@ Kirigami.ApplicationWindow {
+ 
+     property bool showGlobalDrawer: !Kirigami.Settings.isMobile || WindowUtils.isWidescreen
+ 
+-    globalDrawer: globalDrawerLoader.item as globalDrawer
++    globalDrawer: globalDrawerLoader.item as KastsGlobalDrawer
+ 
+     Loader {
+         id: globalDrawerLoader
+-- 
+2.53.0
+
