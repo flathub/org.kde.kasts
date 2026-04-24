@@ -109,6 +109,10 @@
           "path": "0002-Fix-casting-of-globaldrawer-to-correct-type.patch"
         },
         {
+          "type": "patch",
+          "path": "0003-Fix-doing-quick-feed-updates.patch"
+        },
+        {
           "type": "file",
           "path": "run_kasts.sh"
         }
