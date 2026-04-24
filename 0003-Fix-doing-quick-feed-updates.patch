@@ -1,0 +1,107 @@
+From 450fdf7b9835732d24e6c7d13be158053bbe446c Mon Sep 17 00:00:00 2001
+From: Bart De Vries <bart@mogwai.be>
+Date: Wed, 22 Apr 2026 20:07:59 +0200
+Subject: [PATCH] Fix doing quick feed updates
+
+After the big refactor the quick feed update routine was broken. This
+was due to the fact that the update routine would not check the
+enclosures and authors of episodes that already existed in the database.
+Therefore, these enclosures and authors would stay marked as
+"deleted".  (Deleted is the default state; it's only changed after the
+enclosure or author has been found in the RSS feed, which is exactly
+what gets skipped in a quick update.)  This would then lead to
+corruption of the database.
+
+BUG: 519232
+---
+ src/datamanager.cpp         |  1 +
+ src/utils/updatefeedjob.cpp | 46 ++++++++++++++++++++-----------------
+ 2 files changed, 26 insertions(+), 21 deletions(-)
+
+diff --git a/src/datamanager.cpp b/src/datamanager.cpp
+index 55c37e75..3e7494e7 100644
+--- a/src/datamanager.cpp
++++ b/src/datamanager.cpp
+@@ -173,6 +173,7 @@ void DataManager::removeFeeds(const QList<Feed *> &feeds)
+             // Remove entries from Queue
+             bulkQueueStatus(false, entries);
+ 
++            // TODO: Optimize the file deletion; do not depend on the entry objects
+             // Delete entries themselves
+             qCDebug(kastsDataManager) << "delete entries of" << feeduid;
+             for (auto &entryuid : std::as_const(entries)) {
+diff --git a/src/utils/updatefeedjob.cpp b/src/utils/updatefeedjob.cpp
+index d45ed00f..f9856735 100644
+--- a/src/utils/updatefeedjob.cpp
++++ b/src/utils/updatefeedjob.cpp
+@@ -860,21 +860,23 @@ void UpdateFeedJob::writeToDatabase()
+     writeQuery.clear();
+ 
+     // delete entry authors that were removed
+-    writeQuery.prepare(QStringLiteral("DELETE FROM EntryAuthors WHERE entryuid=:entryuid AND name=:name;"));
+-    for (const EntryDetails &entryDetails : std::as_const(m_feed.entries)) {
+-        if (entryDetails.state != RecordState::Deleted) {
+-            for (const AuthorDetails &authorDetails : std::as_const(entryDetails.authors)) {
+-                if (authorDetails.state == RecordState::Deleted) {
+-                    updatedEntryuids.insert(entryDetails.entryuid);
+-                    writeQuery.bindValue(QStringLiteral(":entryuid"), entryDetails.entryuid);
+-                    writeQuery.bindValue(QStringLiteral(":name"), authorDetails.name);
+-                    dbExecute(writeQuery);
+-                    qCDebug(kastsUpdater) << "deleted old entry author:" << m_feed.feeduid << entryDetails.entryuid << authorDetails.name;
++    if (SettingsManager::self()->doFullUpdate()) { // only if this is a full update
++        writeQuery.prepare(QStringLiteral("DELETE FROM EntryAuthors WHERE entryuid=:entryuid AND name=:name;"));
++        for (const EntryDetails &entryDetails : std::as_const(m_feed.entries)) {
++            if (entryDetails.state != RecordState::Deleted) {
++                for (const AuthorDetails &authorDetails : std::as_const(entryDetails.authors)) {
++                    if (authorDetails.state == RecordState::Deleted) {
++                        updatedEntryuids.insert(entryDetails.entryuid);
++                        writeQuery.bindValue(QStringLiteral(":entryuid"), entryDetails.entryuid);
++                        writeQuery.bindValue(QStringLiteral(":name"), authorDetails.name);
++                        dbExecute(writeQuery);
++                        qCDebug(kastsUpdater) << "deleted old entry author:" << m_feed.feeduid << entryDetails.entryuid << authorDetails.name;
++                    }
+                 }
+             }
+         }
++        writeQuery.clear();
+     }
+-    writeQuery.clear();
+ 
+     // new enclosures
+     writeQuery.prepare(
+@@ -923,20 +925,22 @@ void UpdateFeedJob::writeToDatabase()
+     writeQuery.clear();
+ 
+     // delete removed enclosures
+-    writeQuery.prepare(QStringLiteral("DELETE FROM Enclosures WHERE enclosureuid=:enclosureuid;"));
+-    for (const EntryDetails &entryDetails : std::as_const(m_feed.entries)) {
+-        if (entryDetails.state != RecordState::Deleted) {
+-            for (const EnclosureDetails &enclosureDetails : std::as_const(entryDetails.enclosures)) {
+-                if (enclosureDetails.state == RecordState::Deleted) {
+-                    updatedEntryuids.insert(entryDetails.entryuid);
+-                    writeQuery.bindValue(QStringLiteral(":enclosureuid"), enclosureDetails.enclosureuid);
+-                    dbExecute(writeQuery);
+-                    qCDebug(kastsUpdater) << "deleted old enclosure:" << m_feed.feeduid << enclosureDetails.enclosureuid << enclosureDetails.url;
++    if (SettingsManager::self()->doFullUpdate()) { // only if this is a full update
++        writeQuery.prepare(QStringLiteral("DELETE FROM Enclosures WHERE enclosureuid=:enclosureuid;"));
++        for (const EntryDetails &entryDetails : std::as_const(m_feed.entries)) {
++            if (entryDetails.state != RecordState::Deleted) {
++                for (const EnclosureDetails &enclosureDetails : std::as_const(entryDetails.enclosures)) {
++                    if (enclosureDetails.state == RecordState::Deleted) {
++                        updatedEntryuids.insert(entryDetails.entryuid);
++                        writeQuery.bindValue(QStringLiteral(":enclosureuid"), enclosureDetails.enclosureuid);
++                        dbExecute(writeQuery);
++                        qCDebug(kastsUpdater) << "deleted old enclosure:" << m_feed.feeduid << enclosureDetails.enclosureuid << enclosureDetails.url;
++                    }
+                 }
+             }
+         }
++        writeQuery.clear();
+     }
+-    writeQuery.clear();
+ 
+     // new chapters
+     writeQuery.prepare(QStringLiteral("INSERT INTO Chapters (entryuid, start, title, link, image) VALUES (:entryuid, :start, :title, :link, :image);"));
+-- 
+2.54.0
+
