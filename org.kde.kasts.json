@@ -1,122 +1,122 @@
 {
-  "id": "org.kde.kasts",
-  "rename-icon": "kasts",
-  "runtime": "org.kde.Platform",
-  "runtime-version": "6.10",
-  "sdk": "org.kde.Sdk",
-  "command": "kasts",
-  "finish-args": [
-    "--share=ipc",
-    "--share=network",
-    "--socket=fallback-x11",
-    "--socket=wayland",
-    "--device=dri",
-    "--socket=pulseaudio",
-    "--own-name=org.mpris.MediaPlayer2.kasts",
-    "--talk-name=org.freedesktop.secrets",
-    "--talk-name=org.kde.StatusNotifierWatcher",
-    "--talk-name=org.freedesktop.PowerManagement.Inhibit",
-    "--talk-name=org.gnome.SessionManager"
-  ],
-  "cleanup": [
-    "/include",
-    "/lib/pkgconfig",
-    "/lib/cmake",
-    "*.la",
-    "*.a"
-  ],
-  "cleanup-commands": [
-    "rm -f /app/lib/vlc/plugins/plugins.dat",
-    "/app/lib/vlc/vlc-cache-gen /app/lib/vlc/plugins"
-  ],
-  "modules": [
-    {
-      "name": "libvlc",
-      "config-opts": [
-        "BUILDCC=gcc",
-        "--disable-lua",
-        "--disable-a52",
-        "--disable-qt",
-        "--disable-ncurses",
-        "--disable-udev"
-      ],
-      "sources": [
+    "id": "org.kde.kasts",
+    "rename-icon": "kasts",
+    "runtime": "org.kde.Platform",
+    "runtime-version": "6.10",
+    "sdk": "org.kde.Sdk",
+    "command": "kasts",
+    "finish-args": [
+        "--share=ipc",
+        "--share=network",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--socket=pulseaudio",
+        "--own-name=org.mpris.MediaPlayer2.kasts",
+        "--talk-name=org.freedesktop.secrets",
+        "--talk-name=org.kde.StatusNotifierWatcher",
+        "--talk-name=org.freedesktop.PowerManagement.Inhibit",
+        "--talk-name=org.gnome.SessionManager"
+    ],
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/lib/cmake",
+        "*.la",
+        "*.a"
+    ],
+    "cleanup-commands": [
+        "rm -f /app/lib/vlc/plugins/plugins.dat",
+        "/app/lib/vlc/vlc-cache-gen /app/lib/vlc/plugins"
+    ],
+    "modules": [
         {
-          "type": "archive",
-          "url": "https://get.videolan.org/vlc/3.0.23/vlc-3.0.23.tar.xz",
-          "sha256": "e891cae6aa3ccda69bf94173d5105cbc55c7a7d9b1d21b9b21666e69eff3e7e0",
-          "x-checker-data": {
-            "type": "anitya",
-            "project-id": 6504,
-            "stable-only": true,
-            "url-template": "https://get.videolan.org/vlc/$version/vlc-$version.tar.xz"
-          }
+            "name": "libvlc",
+            "config-opts": [
+                "BUILDCC=gcc",
+                "--disable-lua",
+                "--disable-a52",
+                "--disable-qt",
+                "--disable-ncurses",
+                "--disable-udev"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://get.videolan.org/vlc/3.0.23/vlc-3.0.23.tar.xz",
+                    "sha256": "e891cae6aa3ccda69bf94173d5105cbc55c7a7d9b1d21b9b21666e69eff3e7e0",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 6504,
+                        "stable-only": true,
+                        "url-template": "https://get.videolan.org/vlc/$version/vlc-$version.tar.xz"
+                    }
+                },
+                {
+                    "type": "patch",
+                    "path": "vlc-ignore-time-for-cache.patch"
+                }
+            ]
         },
         {
-          "type": "patch",
-          "path": "vlc-ignore-time-for-cache.patch"
+            "name": "qtkeychain",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/frankosterfeld/qtkeychain/archive/0.15.0.tar.gz",
+                    "sha256": "f4254dc8f0933b06d90672d683eab08ef770acd8336e44dfa030ce041dc2ca22",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 4138,
+                        "stable-only": true,
+                        "url-template": "https://github.com/frankosterfeld/qtkeychain/archive/$version.tar.gz"
+                    }
+                }
+            ],
+            "config-opts": [
+                "-DCMAKE_INSTALL_LIBDIR=/app/lib",
+                "-DLIB_INSTALL_DIR=/app/lib",
+                "-DBUILD_TRANSLATIONS=NO",
+                "-DBUILD_WITH_QT6=ON"
+            ]
+        },
+        {
+            "name": "kasts",
+            "buildsystem": "cmake-ninja",
+            "post-install": [
+                "mv /app/bin/{kasts,kasts-bin}",
+                "install run_kasts.sh /app/bin/kasts"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.kde.org/stable/release-service/26.04.1/src/kasts-26.04.1.tar.xz",
+                    "sha256": "a59741617f1e708146c5e344206ffac0051255c18031f09631886804fdb487c4",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 326638,
+                        "stable-only": true,
+                        "url-template": "https://download.kde.org/stable/release-service/$version/src/kasts-$version.tar.xz"
+                    }
+                },
+                {
+                    "type": "patch",
+                    "path": "0001-force-breeze-icons.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "0002-Fix-casting-of-globaldrawer-to-correct-type.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "0003-Fix-doing-quick-feed-updates.patch"
+                },
+                {
+                    "type": "file",
+                    "path": "run_kasts.sh"
+                }
+            ]
         }
-      ]
-    },
-    {
-      "name": "qtkeychain",
-      "buildsystem": "cmake-ninja",
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://github.com/frankosterfeld/qtkeychain/archive/0.15.0.tar.gz",
-          "sha256": "f4254dc8f0933b06d90672d683eab08ef770acd8336e44dfa030ce041dc2ca22",
-          "x-checker-data": {
-            "type": "anitya",
-            "project-id": 4138,
-            "stable-only": true,
-            "url-template": "https://github.com/frankosterfeld/qtkeychain/archive/$version.tar.gz"
-          }
-        }
-      ],
-      "config-opts": [
-        "-DCMAKE_INSTALL_LIBDIR=/app/lib",
-        "-DLIB_INSTALL_DIR=/app/lib",
-        "-DBUILD_TRANSLATIONS=NO",
-        "-DBUILD_WITH_QT6=ON"
-      ]
-    },
-    {
-      "name": "kasts",
-      "buildsystem": "cmake-ninja",
-      "post-install": [
-        "mv /app/bin/{kasts,kasts-bin}",
-        "install run_kasts.sh /app/bin/kasts"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://download.kde.org/stable/release-service/26.04.0/src/kasts-26.04.0.tar.xz",
-          "sha256": "4afe5874ef87508078781569221a1780d9f318274d7ab6f915c1385189e229dd",
-          "x-checker-data": {
-            "type": "anitya",
-            "project-id": 326638,
-            "stable-only": true,
-            "url-template": "https://download.kde.org/stable/release-service/$version/src/kasts-$version.tar.xz"
-          }
-        },
-        {
-          "type": "patch",
-          "path": "0001-force-breeze-icons.patch"
-        },
-        {
-          "type": "patch",
-          "path": "0002-Fix-casting-of-globaldrawer-to-correct-type.patch"
-        },
-        {
-          "type": "patch",
-          "path": "0003-Fix-doing-quick-feed-updates.patch"
-        },
-        {
-          "type": "file",
-          "path": "run_kasts.sh"
-        }
-      ]
-    }
-  ]
+    ]
 }
