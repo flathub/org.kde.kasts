@@ -97,6 +97,7 @@
                         "type": "anitya",
                         "project-id": 326638,
                         "stable-only": true,
+                        "is-main-source": true,
                         "url-template": "https://download.kde.org/stable/release-service/$version/src/kasts-$version.tar.xz"
                     }
                 },
